@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;   // Interagir com UI
 
@@ -17,6 +18,12 @@ public class Player : MonoBehaviour
     public Boundary boundary;   // Classe que foi criada a cima
 
     public GameObject bullet;   // Tiro do player
+
+    public int fireLevel = 1;   // Controla lovel dos tiros
+
+    // Controla quantidade de tiros
+    public float fireRate;      // Tempo fixo para liberar o proximo tiro
+    private float nextFire;     // Vai receber tempo atual do jogo + o tempo fixo
 
     // UI botão de tiro
     public Button shootButton;      // referência ao botão
@@ -51,7 +58,24 @@ public class Player : MonoBehaviour
 
     void Shoot()    // Efetua o tiro
     {
-        Instantiate(bulletPrefab, shotSpawns[0].position, shotSpawns[0].rotation);  // Instancia a bala no ponto de tiro
+        if(Time.time > nextFire)    // Verifica se passou o tempo para liberar o proximo tiro
+        {
+            if(fireLevel >= 1)  // Verifica se esta no level 1
+            {
+                Instantiate(bulletPrefab, shotSpawns[0].position, shotSpawns[0].rotation);  // Instancia a bala no ponto de tiro
+            }
+            if(fireLevel >= 2) // Verifica se esta no level 2
+            {
+                Instantiate(bulletPrefab, shotSpawns[1].position, shotSpawns[1].rotation);  // Instancia a bala no ponto de tiro
+                Instantiate(bulletPrefab, shotSpawns[2].position, shotSpawns[2].rotation);  // Instancia a bala no ponto de tiro
+            }
+            if(fireLevel >= 3)
+            {
+                Instantiate(bulletPrefab, shotSpawns[3].position, shotSpawns[3].rotation);  // Instancia a bala no ponto de tiro
+                Instantiate(bulletPrefab, shotSpawns[4].position, shotSpawns[4].rotation);  // Instancia a bala no ponto de tiro
+            }
+            nextFire = Time.time + fireRate;                                            // Atualiza o tempo do proximo tiro
+        }
     }
 
 }
