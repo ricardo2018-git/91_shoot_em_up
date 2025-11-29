@@ -10,7 +10,7 @@ public class Mover : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();               // Acessa componente do obj
 
-        rb.linearVelocity = Vector2.up * speed;         // Faz obj ir para cima
+        rb.linearVelocity = transform.up * speed;         // Faz obj ir para cima
     }
 
     
