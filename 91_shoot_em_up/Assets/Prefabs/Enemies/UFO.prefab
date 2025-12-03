@@ -111,7 +111,9 @@ GameObject:
   - component: {fileID: 7827502922975870710}
   - component: {fileID: 7165885833132869364}
   - component: {fileID: 840942913149425618}
-  m_Layer: 0
+  - component: {fileID: 2259197098955080543}
+  - component: {fileID: -2554968813844110222}
+  m_Layer: 10
   m_Name: UFO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,6 +299,34 @@ MonoBehaviour:
   - {fileID: 4462997193513836878}
   - {fileID: 4673259347545712281}
   - {fileID: 5419435277683231994}
+--- !u!114 &2259197098955080543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635434474289495806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6983a9ca6097a6a4482e71162f00ca26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  explosion: {fileID: 5181172836508367736, guid: 544488799ca47f24c848a992b1957414, type: 3}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &-2554968813844110222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635434474289495806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63470c9b7265caf4f9cc70efb764148a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &8828806526949740209
 GameObject:
   m_ObjectHideFlags: 0

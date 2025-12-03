@@ -17,11 +17,11 @@ TagManager:
   - Player
   - Player Bullet
   - Player Hit
-  - 
+  - Player Shot
   - Enemy
   - Enemy Bullet
   - Enemy Hit
-  - 
+  - Enemy Shot
   - Boss
   - Boss Bullet
   - 
