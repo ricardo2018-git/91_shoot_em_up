@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;   // Interagir com UI
@@ -11,6 +12,8 @@ public class Boundary   // São os limites que player pode ir pela tela
 
 public class Player : MonoBehaviour
 {
+    public int lives = 3;                   // Qts vidas player
+    private bool isDead = false;            // Sinaliza se player esta morto
     public Joystick movementJoystick;
     public float playerSpeed;
     private Rigidbody2D rb;
@@ -18,6 +21,7 @@ public class Player : MonoBehaviour
     public Boundary boundary;   // Classe que foi criada a cima
 
     public GameObject bullet;   // Tiro do player
+    private SpriteRenderer sprite;  // Sprite do player
 
     public int fireLevel = 1;   // Controla lovel dos tiros
 
@@ -32,8 +36,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        shootButton.onClick.AddListener(Shoot); // Vincula a função Shoot ao clique do botão
+        rb = GetComponent<Rigidbody2D>();           // 
+        sprite = GetComponent<SpriteRenderer>();    // 
+        shootButton.onClick.AddListener(Shoot);     // Vincula a função Shoot ao clique do botão
     }
 
     void Update()
@@ -76,6 +81,28 @@ public class Player : MonoBehaviour
             }
             nextFire = Time.time + fireRate;                                            // Atualiza o tempo do proximo tiro
         }
+    }
+
+    public void Respawn()
+    {
+        lives--;    // Tira uma vida do player
+        if(lives > 0)   // Verifica se player tem vidas ainda
+        {
+            
+        }
+        else
+        {
+            lives = 0;              // Zera qts de vidas
+            isDead = true;          // Sinaliza que player morreu
+            sprite.enabled = false; // Desativa sprite do player
+        }
+    }
+
+    IEnumerator Spawning()
+    {
+        isDead = true;          // Sinaliza que player morreu
+        sprite.enabled = false; // Desativa sprite player
+
     }
 
 }
