@@ -22,8 +22,12 @@ public class Player : MonoBehaviour
 
     public GameObject bullet;   // Tiro do player
     private SpriteRenderer sprite;  // Sprite do player
+    private Vector3 startPosition;  // Posição inicial padrão do player
 
-    public int fireLevel = 1;   // Controla lovel dos tiros
+    public float spawnTime;         // Tempo para spawnar
+    public float invencibilityTime; // Tempo que player não recebe dano depois de ser spaenado
+
+    public int fireLevel = 1;   // Controla level dos tiros
 
     // Controla quantidade de tiros
     public float fireRate;      // Tempo fixo para liberar o proximo tiro
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();           // 
         sprite = GetComponent<SpriteRenderer>();    // 
         shootButton.onClick.AddListener(Shoot);     // Vincula a função Shoot ao clique do botão
+        startPosition = transform.position;         // Pega posição inicial do player
     }
 
     void Update()
@@ -88,7 +93,7 @@ public class Player : MonoBehaviour
         lives--;    // Tira uma vida do player
         if(lives > 0)   // Verifica se player tem vidas ainda
         {
-            
+            StartCoroutine(Spawning());     // Executa o IEnumerator 
         }
         else
         {
@@ -98,11 +103,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator Spawning()
+    IEnumerator Spawning()                          // Processo de perda de vida player
     {
-        isDead = true;          // Sinaliza que player morreu
-        sprite.enabled = false; // Desativa sprite player
-
+        isDead = true;                              // Sinaliza que player morreu
+        sprite.enabled = false;                     // Desativa sprite player
+        fireLevel = 0;                              // level do tiro inicial
+        gameObject.layer = 10;                      // Muda player para layer do enemy que é a 10
+        yield return new WaitForSeconds(spawnTime); // Espero por x segundos
+        isDead = false;                             // Sinaliza que player esta vivo
+        transform.position = startPosition;         // Posiciona player na posição padrão do inicio do game
+        for (float i = 0; i < invencibilityTime; i+= 0.1f)   // Como se fosse um cronometro.
+        {
+            sprite.enabled = !sprite.enabled;       // Faz ficar piscando o sprite do player
+            yield return new WaitForSeconds(0.1f);  // Espera por x segundos
+        }
+        gameObject.layer = 6;   // Volta player para sua layer inicial
+        sprite.enabled = true;  // Garante que que o sprite do player vai esta ativado
     }
 
 }

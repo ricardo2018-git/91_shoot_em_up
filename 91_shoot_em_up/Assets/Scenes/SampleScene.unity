@@ -1447,7 +1447,7 @@ Transform:
   m_GameObject: {fileID: 1207218511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.46, y: -3.22, z: 0}
+  m_LocalPosition: {x: 0, y: -3.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1539,6 +1539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1753e78a311a7814baa7371cd50c2433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lives: 3
   movementJoystick: {fileID: 8956263370072737195}
   playerSpeed: 5
   boundary:
@@ -1546,9 +1547,11 @@ MonoBehaviour:
     xMax: 2.7
     yMin: -3
     yMax: 4.5
-  bullet: {fileID: 0}
-  fireLevel: 3
-  fireRate: 0.3
+  bullet: {fileID: 5038541434320242719, guid: 54ab9305e2a8f1442a4f64e5dec601e5, type: 3}
+  spawnTime: 2
+  invencibilityTime: 2
+  fireLevel: 1
+  fireRate: 0.2
   shootButton: {fileID: 236986934}
   bulletPrefab: {fileID: 5038541434320242719, guid: 54ab9305e2a8f1442a4f64e5dec601e5, type: 3}
   shotSpawns:

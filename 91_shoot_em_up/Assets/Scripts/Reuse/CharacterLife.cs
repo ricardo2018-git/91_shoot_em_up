@@ -30,7 +30,7 @@ public class CharacterLife : MonoBehaviour
                 Instantiate(explosion, transform.position, transform.rotation); // Instancia explosão depois que morrer
                 if(this.GetComponent<Player>() != null)     // Verifica se existe esse componente no game object. É um forma de identificar se esse script esta no player
                 {
-                    
+                    GetComponent<Player>().Respawn();   // Executa função do player
                 }
                 else
                 {
