@@ -101,14 +101,16 @@ public class Player : MonoBehaviour
             isDead = true;          // Sinaliza que player morreu
             sprite.enabled = false; // Desativa sprite do player
         }
+
+        LevelController.levelController.SetLivesText(lives);    // Atualiza vidas na UI
     }
 
     IEnumerator Spawning()                          // Processo de perda de vida player
     {
         isDead = true;                              // Sinaliza que player morreu
         sprite.enabled = false;                     // Desativa sprite player
-        fireLevel = 0;                              // level do tiro inicial
-        gameObject.layer = 10;                      // Muda player para layer do enemy que é a 10
+        fireLevel = 1;                              // level do tiro inicial
+        gameObject.layer = 11;                      // Muda player para layer do enemy que é a 10
         yield return new WaitForSeconds(spawnTime); // Espero por x segundos
         isDead = false;                             // Sinaliza que player esta vivo
         transform.position = startPosition;         // Posiciona player na posição padrão do inicio do game
