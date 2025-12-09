@@ -1961,6 +1961,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livesText: {fileID: 1342220632}
+  startWait: 3
+  enemyCountMax: 10
+  spawnWaitMin: 0.1
+  waveWait: 2.5
+  waveWaitMin: 0.5
+  enemies:
+  - {fileID: 2975708631361010640, guid: 709883e405fe1c247876e5fa671f0d77, type: 3}
+  - {fileID: 4196147562002757485, guid: 6add556f05fec1b4cbf55443e13a33bd, type: 3}
+  - {fileID: 7635434474289495806, guid: 5b0e6551867fd8349a09fdd44f7c8563, type: 3}
+  boundary:
+    xMin: -3
+    xMax: 3
+    yMin: 7
+    yMax: 0
+  spawnWait: {x: 1, y: 2}
 --- !u!1 &1600287527
 GameObject:
   m_ObjectHideFlags: 0
