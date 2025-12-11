@@ -8,7 +8,9 @@ public class LevelController : MonoBehaviour
 {
     public static LevelController levelController;  // 
 
-    public TMP_Text livesText;      // 
+    public TMP_Text livesText;      // Texto UI das vidas player
+    public TMP_Text scoreText;      // texto UI da pontuação player
+    private int score;              // Pontuação player
 
     public float startWait;         // Tempo para inicio dos spwans
     private bool gameOver = false;  // Sinaliza se jogo acabou
@@ -71,5 +73,11 @@ public class LevelController : MonoBehaviour
     public void SetLivesText(int lives)     // Atualiza qts vidas no UI
     {
         livesText.text = lives.ToString();  // 
+    }
+
+    public void SetScore(int scorePoints)   // Atualiza pontos player na UI
+    {
+        score += scorePoints;               // Atualiza pontuação com atual + o recebido
+        scoreText.text = "Score: " + score.ToString();  // Atualiza pontos na UI
     }
 }

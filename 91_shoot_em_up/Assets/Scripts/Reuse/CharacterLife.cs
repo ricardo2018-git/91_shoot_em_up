@@ -6,6 +6,9 @@ public class CharacterLife : MonoBehaviour
     public int health;              // Vida player
     private bool isDead = false;    // Sinaliza se player esta morto
 
+    public int scorePoints;         // Pontuação player
+
+
     public GameObject explosion;    // Game objeto da explosão
     private SpriteRenderer sprite;  // Sprite do objeto
     public Color damageColor;       // Cor
@@ -35,6 +38,7 @@ public class CharacterLife : MonoBehaviour
                 else
                 {
                     isDead = true;          // Sinaliza que morreu
+                    LevelController.levelController.SetScore(scorePoints);  // Atualiza pontuação do UI
                     Destroy(gameObject);    // Destroi obj
                 }
             }

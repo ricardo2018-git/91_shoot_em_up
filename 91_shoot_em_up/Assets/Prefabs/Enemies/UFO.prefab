@@ -312,6 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  scorePoints: 20
   explosion: {fileID: 5181172836508367736, guid: 544488799ca47f24c848a992b1957414, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &-2554968813844110222
