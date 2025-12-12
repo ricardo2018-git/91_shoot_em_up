@@ -3,6 +3,7 @@ using TMPro;            // Texto no canvas
 using UnityEngine.UI;
 using System.Collections;
 using Unity.VisualScripting;   // Manipular elementos de UI
+using UnityEngine.SceneManagement;  // Para recarregar tela
 
 public class LevelController : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class LevelController : MonoBehaviour
     public TMP_Text livesText;      // Texto UI das vidas player
     public TMP_Text scoreText;      // texto UI da pontuação player
     private int score;              // Pontuação player
+
+    public TMP_Text recordText;     // Recorde de pontuação em texto
+
+    public GameObject gameOverPanel;    // Tela de game over
 
     public float startWait;         // Tempo para inicio dos spwans
     private bool gameOver = false;  // Sinaliza se jogo acabou
@@ -33,7 +38,13 @@ public class LevelController : MonoBehaviour
     
     void Update()
     {
-        
+        if (gameOver)   // Verifica se player perdeu jogo
+        {
+            if (Input.GetMouseButtonDown(0))    // Verifica se foi pressionado btn esquerdo do mouse. Obs: no android traduz para um toque na tela
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);   // Recarrega cena atual
+            }
+        }
     }
 
     IEnumerator SpawnWaves()
@@ -79,5 +90,19 @@ public class LevelController : MonoBehaviour
     {
         score += scorePoints;               // Atualiza pontuação com atual + o recebido
         scoreText.text = "Score: " + score.ToString();  // Atualiza pontos na UI
+    }
+
+    public void GameOver()  
+    {
+        gameOver = true;                // Sinaliza que perdeu jogo
+        gameOverPanel.SetActive(true);  // Ativa painel game over
+
+        // Salva maior pontuação do jogo
+        if(PlayerPrefs.GetInt("MaxScore") < score)  // Verifica se maior score ja salvo é menor que score
+        {
+            PlayerPrefs.SetInt("MaxScore", score);  // Salva score atual do jogo
+        }
+
+        recordText.text = "Record: " + PlayerPrefs.GetInt("MaxScore");  // Mostra maior pontuação ja feita no jogo
     }
 }

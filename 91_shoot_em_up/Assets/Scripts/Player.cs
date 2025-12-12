@@ -100,6 +100,7 @@ public class Player : MonoBehaviour
             lives = 0;              // Zera qts de vidas
             isDead = true;          // Sinaliza que player morreu
             sprite.enabled = false; // Desativa sprite do player
+            LevelController.levelController.GameOver(); // Acessa função de game over
         }
 
         LevelController.levelController.SetLivesText(lives);    // Atualiza vidas na UI
