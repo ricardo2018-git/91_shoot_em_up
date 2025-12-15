@@ -12,6 +12,8 @@ public class Boundary   // São os limites que player pode ir pela tela
 
 public class Player : MonoBehaviour
 {
+    private CharacterLife characterLife;    // Referencia ao script
+
     public int lives = 3;                   // Qts vidas player
     private bool isDead = false;            // Sinaliza se player esta morto
     public Joystick movementJoystick;
@@ -44,6 +46,8 @@ public class Player : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();    // 
         shootButton.onClick.AddListener(Shoot);     // Vincula a função Shoot ao clique do botão
         startPosition = transform.position;         // Pega posição inicial do player
+
+        characterLife = GetComponent<CharacterLife>();  // Acessa o proprio componente
     }
 
     void Update()
@@ -122,6 +126,7 @@ public class Player : MonoBehaviour
         }
         gameObject.layer = 6;   // Volta player para sua layer inicial
         sprite.enabled = true;  // Garante que que o sprite do player vai esta ativado
+        characterLife.isDead = false;   // Sinaliza que player morreu para outro script
     }
 
 }
