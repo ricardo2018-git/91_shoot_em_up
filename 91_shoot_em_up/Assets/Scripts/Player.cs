@@ -10,6 +10,13 @@ public class Boundary   // São os limites que player pode ir pela tela
     public float yMin, yMax;    // Limite minimo e maximo vertical
 }
 
+public enum ItemEffect
+{
+    shield,     // Escudo
+    levelUp,    // Aumenta nivel do tiro
+    special     // Aumenta numero de especiais
+}
+
 public class Player : MonoBehaviour
 {
     private CharacterLife characterLife;    // Referencia ao script
@@ -127,6 +134,18 @@ public class Player : MonoBehaviour
         gameObject.layer = 6;   // Volta player para sua layer inicial
         sprite.enabled = true;  // Garante que que o sprite do player vai esta ativado
         characterLife.isDead = false;   // Sinaliza que player morreu para outro script
+    }
+
+    public void SetItemEffect(ItemEffect effect)    // coloca no player
+    {
+        if(effect == ItemEffect.levelUp)    // Verifica se o effect é igual levelUp
+        {
+            fireLevel++;                    // add
+            if(fireLevel >= 3)              // Verifica se fireLevel chegou no limite
+            {
+                fireLevel = 3;              // Limita o fireLevel em 3
+            }
+        }
     }
 
 }
