@@ -6,7 +6,7 @@ public class CharacterLife : MonoBehaviour
     public int health;              // Vida player
 
     [HideInInspector]               // Não deixa aparecer a variavel isDead na unity mesmo ela sendo publica
-    public bool isDead = false;    // Sinaliza se player esta morto
+    public bool isDead = false;     // Sinaliza se player esta morto
 
     public int scorePoints;         // Pontuação player
 
