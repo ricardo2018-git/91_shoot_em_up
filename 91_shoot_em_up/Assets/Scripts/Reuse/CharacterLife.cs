@@ -15,6 +15,9 @@ public class CharacterLife : MonoBehaviour
     private SpriteRenderer sprite;  // Sprite do objeto
     public Color damageColor;       // Cor
 
+    public GameObject[] dropItems;  // Itens que pode ser dropado depois da morte do enemy
+    private static int chanceToDroptItem = 0;    // Static todos que tiver esse script vai compartilhar o mesmo valor dessa var
+
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();    // Acessa proprio sprite
@@ -40,7 +43,13 @@ public class CharacterLife : MonoBehaviour
                 }
                 else
                 {
-                    
+                    chanceToDroptItem++;    // Contagem +1
+                    int random = Random.Range(0, 100);  // Sorteia um valor entre
+                    if(random < chanceToDroptItem && dropItems.Length > 0)  // Verifica se o numero sorteado é menor que a chance de drop E se existem itens que pode ser dropado
+                    {
+                        Instantiate(dropItems[Random.Range(0, dropItems.Length)], transform.position, Quaternion.identity); // Cria o item na tela
+                        chanceToDroptItem = 0;  // Reseta chance se dropar o item
+                    }
                     LevelController.levelController.SetScore(scorePoints);  // Atualiza pontuação do UI
                     Destroy(gameObject);    // Destroi obj
                 }

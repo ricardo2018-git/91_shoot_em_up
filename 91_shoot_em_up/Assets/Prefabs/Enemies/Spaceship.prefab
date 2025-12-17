@@ -232,9 +232,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4
+  isDead: 0
   scorePoints: 30
   explosion: {fileID: 5181172836508367736, guid: 544488799ca47f24c848a992b1957414, type: 3}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
+  dropItems:
+  - {fileID: 6029597402903526285, guid: 4f9a246a0d369d24fbe9dba52138f54f, type: 3}
+  - {fileID: 8021314051563456606, guid: 64491d615b09d454998a4b4133253cca, type: 3}
+  - {fileID: 5666218171660383146, guid: 3d5471591a579134780c640feec14ddb, type: 3}
 --- !u!114 &5502985996300837422
 MonoBehaviour:
   m_ObjectHideFlags: 0
