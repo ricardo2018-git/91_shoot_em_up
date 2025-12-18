@@ -14,6 +14,7 @@ public class LevelController : MonoBehaviour
     private int score;              // Pontuação player
 
     public TMP_Text recordText;     // Recorde de pontuação em texto
+    public TMP_Text specialText;    // Qts de laser
 
     public GameObject gameOverPanel;    // Tela de game over
 

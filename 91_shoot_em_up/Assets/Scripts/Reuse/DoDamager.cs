@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class DoDamager : MonoBehaviour
 {
-    public int damage = 1;  // Dano que vai ser aplicado
+    public int damage = 1;  // Dano que vai ser aplicado por padrão
+
+    public bool destroyByContact = true;    // 
+    public bool destroyShots = false;       // 
 
     void Start()
     {
@@ -20,7 +23,16 @@ public class DoDamager : MonoBehaviour
         if(character != null)   // Verifica se NÃO é null
         {
             character.TakeDamage(damage);   // Acessa função que aplica dano do game obj
-            Destroy(gameObject);            // Destroi game object
+            if (destroyByContact)           // Verifica se pode destruir obj
+            {
+                Destroy(gameObject);            // Destroi game object
+            }
+        }
+
+        DoDamager shot = other.GetComponent<DoDamager>();   // Tiros
+        if(shot != null && destroyShots)    // 
+        {
+            Destroy(other.gameObject);  // Destroy tiros
         }
     }
 }
