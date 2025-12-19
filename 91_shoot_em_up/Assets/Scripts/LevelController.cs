@@ -106,4 +106,9 @@ public class LevelController : MonoBehaviour
 
         recordText.text = "Record: " + PlayerPrefs.GetInt("MaxScore");  // Mostra maior pontuação ja feita no jogo
     }
+
+    public void SetSpecial(int value)
+    {
+        specialText.text = value.ToString();    // Atualiza valor no UI
+    }
 }

@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer sprite;  // Sprite do player
     private Vector3 startPosition;  // Posição inicial padrão do player
 
+    public GameObject specialLaser; // Vai receber o prefab do laser
+    private int special;            // Quantidade de laser que temos
+
     public float spawnTime;         // Tempo para spawnar
     public float invencibilityTime; // Tempo que player não recebe dano depois de ser spaenado
 
@@ -44,6 +47,7 @@ public class Player : MonoBehaviour
 
     // UI botão de tiro
     public Button shootButton;      // referência ao botão
+    public Button shootButtonSpecial;   // referencia do botão lase
     public GameObject bulletPrefab; // prefab da bala
     public Transform[] shotSpawns;  // ponto de saída da bala
 
@@ -51,15 +55,17 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();           // 
         sprite = GetComponent<SpriteRenderer>();    // 
-        shootButton.onClick.AddListener(Shoot);     // Vincula a função Shoot ao clique do botão
-        startPosition = transform.position;         // Pega posição inicial do player
+        shootButton.onClick.AddListener(Shoot);                 // Vincula a função Shoot ao clique do botão shootButton
+        shootButtonSpecial.onClick.AddListener(ShootLaser);     // Vincula a função ShootLaser ao clique do botão shootButtonSpecial
+        startPosition = transform.position;                     // Pega posição inicial do player
 
         characterLife = GetComponent<CharacterLife>();  // Acessa o proprio componente
     }
 
     void Update()
     {
-
+        
+        
     }
 
     private void FixedUpdate()
@@ -74,6 +80,8 @@ public class Player : MonoBehaviour
         }
 
         rb.position = new Vector2(Mathf.Clamp(rb.position.x, boundary.xMin, boundary.xMax), Mathf.Clamp(rb.position.y, boundary.yMin, boundary.yMax));  // Limita movimentação do player pela tela nos eixos x e y
+
+
 
     }
 
@@ -97,6 +105,16 @@ public class Player : MonoBehaviour
             }
             nextFire = Time.time + fireRate;                                            // Atualiza o tempo do proximo tiro
         }
+    }
+
+    void ShootLaser()
+    {
+        if(special > 0)     // Verifica se player tem laser para ser disparado
+        {
+            Instantiate(specialLaser, transform);   // Player é pai do laser que é instanciado, assim laser segue o player para onde ele for   
+            special--;  // Atualiza quantidade de lase que temos
+            LevelController.levelController.SetSpecial(special);    // Atualiza qtd de laser que temos na UI
+        }     
     }
 
     public void Respawn()
@@ -136,7 +154,7 @@ public class Player : MonoBehaviour
         characterLife.isDead = false;   // Sinaliza que player morreu para outro script
     }
 
-    public void SetItemEffect(ItemEffect effect)    // coloca no player
+    public void SetItemEffect(ItemEffect effect)    // Equipa no player
     {
         if(effect == ItemEffect.levelUp)    // Verifica se o effect é igual levelUp
         {
@@ -145,6 +163,11 @@ public class Player : MonoBehaviour
             {
                 fireLevel = 3;              // Limita o fireLevel em 3
             }
+        }
+        else if(effect == ItemEffect.special)   // Verifica se o effect é igual special
+        {
+            special++;  // Adiciona +1 laser
+            LevelController.levelController.SetSpecial(special);    // Atualiza qtd laser UI
         }
     }
 
