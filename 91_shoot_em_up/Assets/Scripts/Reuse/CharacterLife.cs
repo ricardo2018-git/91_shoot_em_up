@@ -36,7 +36,10 @@ public class CharacterLife : MonoBehaviour
             if(health <= 0)     // Verifica se morreu
             {
                 isDead = true;          // Sinaliza que morreu
-                Instantiate(explosion, transform.position, transform.rotation); // Instancia explosão depois que morrer
+                if(explosion != null)   // Verifica se existe animação de explosão. Obs no Obj Shield "Bolha" não precisa instancia uma explosão quando perder ela
+                {
+                    Instantiate(explosion, transform.position, transform.rotation); // Instancia explosão depois que morrer
+                }
                 if(this.GetComponent<Player>() != null)     // Verifica se existe esse componente no game object. É um forma de identificar se esse script esta no player
                 {
                     GetComponent<Player>().Respawn();   // Executa função do player. [Processo de perda de vida player]

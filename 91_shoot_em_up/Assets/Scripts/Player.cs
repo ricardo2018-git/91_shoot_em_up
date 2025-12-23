@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     public GameObject specialLaser; // Vai receber o prefab do laser
     private int special;            // Quantidade de laser que temos
 
+    public GameObject shield;       // Bolha de proteção
+
     public float spawnTime;         // Tempo para spawnar
     public float invencibilityTime; // Tempo que player não recebe dano depois de ser spaenado
 
@@ -168,6 +170,10 @@ public class Player : MonoBehaviour
         {
             special++;  // Adiciona +1 laser
             LevelController.levelController.SetSpecial(special);    // Atualiza qtd laser UI
+        }
+        else if(effect == ItemEffect.shield)    // Verifica se o effect é igual bolha
+        {
+            Instantiate(shield, transform.position, Quaternion.identity, transform).transform.localPosition = Vector3.zero;// Instancia como filho do player, para ficar seguindo todo movimento
         }
     }
 
